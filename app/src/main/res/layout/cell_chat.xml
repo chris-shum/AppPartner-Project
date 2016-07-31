@@ -5,9 +5,11 @@
     android:orientation="vertical"
     android:padding="@dimen/chat_padding">
 
+    <!--imported library to handle circling images into chat-->
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/chatImage"
         android:layout_width="wrap_content"
+        android:src="@drawable/avatar_default"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/activity_horizontal_margin" />
 

@@ -27,41 +27,45 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends ActionBarActivity {
 
-    Toolbar toolbar;
-    TextView toolbarText;
-    EditText username, password;
-    Button loginButton;
+    private Toolbar mToolbar;
+    private TextView mToolbarText;
+    private EditText mUsernameEditText, mPasswordEditText;
+    private Button mLoginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(android.R.color.black));
-        toolbarText = (TextView) findViewById(R.id.toolBarTextView);
-        toolbarText.setText(R.string.title_activity_login);
-        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato ExtraLight.ttf");
+//        inserted toolbar
+//        inserted text fonts
+//        imported retrofit library to handle API post request
+//        removed onBackPress as it creates an infinite backpress loop
 
-        final Drawable backArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setBackgroundColor(getResources().getColor(android.R.color.black));
+        mToolbarText = (TextView) findViewById(R.id.toolBarTextView);
+        mToolbarText.setText(R.string.title_activity_login);
+        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato ExtraLight.ttf");
+        mToolbarText.setTypeface(myTypeface);
+        Drawable backArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         backArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
-        toolbarText.setTypeface(myTypeface);
-        toolbar.setNavigationIcon(backArrow);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        mToolbar.setNavigationIcon(backArrow);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
         });
 
-        username = (EditText) findViewById(R.id.usernameEditText);
-        password = (EditText) findViewById(R.id.passwordEditText);
+        mUsernameEditText = (EditText) findViewById(R.id.usernameEditText);
+        mPasswordEditText = (EditText) findViewById(R.id.passwordEditText);
         Typeface editTextTypeface = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato.ttf");
-        username.setTypeface(editTextTypeface);
-        password.setTypeface(editTextTypeface);
-        loginButton = (Button) findViewById(R.id.loginButton);
+        mUsernameEditText.setTypeface(editTextTypeface);
+        mPasswordEditText.setTypeface(editTextTypeface);
+        mLoginButton = (Button) findViewById(R.id.loginButton);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LoginToAppPartner(view.getContext());
@@ -69,18 +73,15 @@ public class LoginActivity extends ActionBarActivity {
         });
     }
 
+    //retrofit API post request
     private void LoginToAppPartner(final Context context) {
-
         String rootURL = getResources().getString(R.string.root_URL);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(rootURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
         PostRequest postRequest = retrofit.create(PostRequest.class);
-
-        Call<AppPartnerData> call = postRequest.LoginToAppPartner(username.getText().toString(), password.getText().toString());
-
+        Call<AppPartnerData> call = postRequest.LoginToAppPartner(mUsernameEditText.getText().toString(), mPasswordEditText.getText().toString());
         call.enqueue(new Callback<AppPartnerData>() {
             long startTime = System.currentTimeMillis();
 
@@ -97,13 +98,6 @@ public class LoginActivity extends ActionBarActivity {
         });
 
     }
-
-
-//    @Override
-//    public void onBackPressed() {
-//        Intent intent = new Intent(this, MainActivity.class);
-//        startActivity(intent);
-//    }
 
     public void CreateDialog(Context context, final Response<AppPartnerData> response, long time) {
         new AlertDialog.Builder(context)
@@ -122,5 +116,4 @@ public class LoginActivity extends ActionBarActivity {
                 })
                 .show();
     }
-
 }

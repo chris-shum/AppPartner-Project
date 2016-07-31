@@ -13,7 +13,7 @@
 
 
     <TextView
-        android:id="@+id/activityMainTextview"
+        android:id="@+id/mainActivityTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/coding_tasks"
@@ -21,7 +21,7 @@
         android:textSize="@dimen/coding_tasks_text_size" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/chatActivityButton"
         android:layout_width="@dimen/button_width"
         android:layout_height="@dimen/button_height"
         android:layout_margin="@dimen/margins"
@@ -29,16 +29,16 @@
         android:onClick="onChatButtonClicked" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/loginActivityButton"
         android:layout_width="@dimen/button_width"
         android:layout_height="@dimen/button_height"
         android:layout_margin="@dimen/margins"
         android:background="@drawable/btn_main_login"
         android:onClick="onLoginButtonClicked"
-        android:scaleType="fitCenter" />
+        />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/animationActivityButton"
         android:layout_width="@dimen/button_width"
         android:layout_height="@dimen/button_height"
         android:layout_margin="@dimen/margins"

@@ -27,11 +27,11 @@ import java.util.ArrayList;
 public class ChatActivity extends ActionBarActivity
 {
     private static final String LOG_TAG = "ActionBarActivity";
-    private ArrayList<ChatData> chatDataArrayList;
-    private ChatsArrayAdapter chatsArrayAdapter;
-    private ListView listView;
-    Toolbar toolbar;
-    TextView toolbarText;
+    private ArrayList<ChatData> mChatDataArrayList;
+    private ChatsArrayAdapter mChatsArrayAdapter;
+    private ListView mListView;
+    private Toolbar mToolbar;
+    private TextView mToolbarTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,75 +39,64 @@ public class ChatActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackgroundColor(getResources().getColor(android.R.color.black));
-        toolbarText = (TextView) findViewById(R.id.toolBarTextView);
-        toolbarText.setText(R.string.title_activity_chat);
-        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato ExtraLight.ttf");
+//        inserted toolbar
+//        inserted text fonts
+//        removed onBackPress as it creates an infinite backpress loop
 
-        final Drawable backArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setBackgroundColor(getResources().getColor(android.R.color.black));
+        mToolbarTextView = (TextView) findViewById(R.id.toolBarTextView);
+        mToolbarTextView.setText(R.string.title_activity_chat);
+        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato ExtraLight.ttf");
+        mToolbarTextView.setTypeface(myTypeface);
+        Drawable backArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         backArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
-        toolbarText.setTypeface(myTypeface);
-        toolbar.setNavigationIcon(backArrow);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        mToolbar.setNavigationIcon(backArrow);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
         });
 
-        listView = (ListView) findViewById(R.id.listView);
-        chatDataArrayList = new ArrayList<ChatData>();
+        mListView = (ListView) findViewById(R.id.chatListView);
+        mChatDataArrayList = new ArrayList<ChatData>();
 
         try
         {
             String chatFileData = loadChatFile();
             JSONObject jsonData = new JSONObject(chatFileData);
             JSONArray jsonArray = jsonData.getJSONArray("data");
-
             for (int i = 0; i < jsonArray.length(); i++)
             {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 ChatData chatData = new ChatData(jsonObject);
-                chatDataArrayList.add(chatData);
+                mChatDataArrayList.add(chatData);
             }
         }
         catch (Exception e)
         {
             Log.w(LOG_TAG, e);
         }
-
-        chatsArrayAdapter = new ChatsArrayAdapter(this, chatDataArrayList);
-        listView.setAdapter(chatsArrayAdapter);
+        mChatsArrayAdapter = new ChatsArrayAdapter(this, mChatDataArrayList);
+        mListView.setAdapter(mChatsArrayAdapter);
     }
-
-//    @Override
-//    public void onBackPressed()
-//    {
-//        Intent intent = new Intent(this, MainActivity.class);
-//        startActivity(intent);
-//    }
 
     private String loadChatFile() throws IOException
     {
         InputStream inputStream = getResources().openRawResource(R.raw.chat_data);
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
         String receiveString;
         StringBuilder stringBuilder = new StringBuilder();
-
         while ((receiveString = bufferedReader.readLine()) != null )
         {
             stringBuilder.append(receiveString);
             stringBuilder.append("\n");
         }
-
         bufferedReader.close();
         inputStreamReader.close();
         inputStream.close();
-
-
         return stringBuilder.toString();
     }
 

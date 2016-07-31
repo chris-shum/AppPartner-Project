@@ -1,34 +1,43 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_animation"
-    android:id="@+id/relativeLayout"
     tools:context="com.apppartner.androidprogrammertest.AnimationActivity">
 
     <include layout="@layout/toolbar" />
 
-
-
-    <TextView
-        android:id="@+id/animationTextView"
-        android:layout_width="310dp"
-        android:layout_height="350dp"
+    <ImageView
+        android:id="@+id/animationImage"
+        android:layout_width="@dimen/animation_background_width"
+        android:layout_height="@dimen/animation_background_length"
         android:layout_centerInParent="true"
-        android:background="@drawable/bg_cell_animation_test"
-        android:gravity="center_horizontal"
-        android:padding="@dimen/animation_padding"
-        android:text="@string/animation_prompt"
-        android:textSize="@dimen/animation_prompt" />
+        android:src="@drawable/bg_cell_animation_test" />
 
-    <TextView
-        android:id="@+id/bonusPrompt"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="@dimen/animation_text_width"
+        android:layout_height="@dimen/animation_background_length"
         android:layout_centerInParent="true"
-        android:layout_height="wrap_content"
-        android:text="@string/animation_bonus"
-        android:textSize="@dimen/animation_prompt"
-/>
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/animationTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/animation_padding"
+            android:text="@string/animation_prompt"
+            android:textSize="@dimen/animation_prompt" />
+
+        <TextView
+            android:id="@+id/bonusPromptTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/animation_bonus"
+            android:textSize="@dimen/animation_bonus" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/fadeButton"
@@ -40,17 +49,15 @@
         android:background="@drawable/btn_fade" />
 
     <ImageView
+        android:id="@+id/appIcon"
         android:layout_width="@dimen/app_icon"
         android:layout_height="@dimen/app_icon"
-        android:src="@drawable/ic_apppartner"
-        android:id="@+id/appIcon" />
+        android:src="@drawable/ic_apppartner" />
 
     <ImageView
+        android:id="@+id/hiddenAppIcon"
         android:layout_width="@dimen/app_icon"
         android:layout_height="@dimen/app_icon"
-        android:visibility="gone"
         android:src="@drawable/ic_apppartner"
-        android:id="@+id/appIcon2" />
-
-
+        android:visibility="gone" />
 </RelativeLayout>

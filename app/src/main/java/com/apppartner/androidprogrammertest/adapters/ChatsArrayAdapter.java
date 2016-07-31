@@ -20,42 +20,44 @@ import java.util.List;
  *
  * @author Thomas Colligan
  */
-public class ChatsArrayAdapter extends ArrayAdapter<ChatData>
-{
-    public ChatsArrayAdapter(Context context, List<ChatData> objects)
-    {
+public class ChatsArrayAdapter extends ArrayAdapter<ChatData> {
+    public ChatsArrayAdapter(Context context, List<ChatData> objects) {
         super(context, 0, objects);
     }
 
-    public View getView(int position, View convertView, ViewGroup parent)
-    {
+//    added the imageview to the adapter
+//    imported Picasso library to handle image inserts
+
+    public View getView(int position, View convertView, ViewGroup parent) {
         ChatCell chatCell = new ChatCell();
 
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        convertView = inflater.inflate(R.layout.cell_chat, parent, false);
+        if (convertView == null) {
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            convertView = inflater.inflate(R.layout.cell_chat, parent, false);
 
-        chatCell.chatImage = (ImageView) convertView.findViewById(R.id.chatImage);
-        chatCell.usernameTextView = (TextView) convertView.findViewById(R.id.usernameTextView);
-        chatCell.messageTextView = (TextView) convertView.findViewById(R.id.messageTextView);
+            chatCell.chatImage = (ImageView) convertView.findViewById(R.id.chatImage);
+            chatCell.usernameTextView = (TextView) convertView.findViewById(R.id.usernameTextView);
+            chatCell.messageTextView = (TextView) convertView.findViewById(R.id.messageTextView);
 
-        ChatData chatData = getItem(position);
+            ChatData chatData = getItem(position);
 
-        Picasso.with(convertView.getContext()).load(chatData.avatarURL).into(chatCell.chatImage);
-        chatCell.usernameTextView.setText(chatData.username);
-        chatCell.messageTextView.setText(chatData.message);
+            Picasso.with(convertView.getContext()).load(chatData.avatarURL).into(chatCell.chatImage);
+            chatCell.usernameTextView.setText(chatData.username);
+            chatCell.messageTextView.setText(chatData.message);
 
-        Typeface userNameTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Jelloween - Machinato.ttf");
-        chatCell.usernameTextView.setTypeface(userNameTypeface);
-        Typeface messageTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Jelloween - Machinato Light.ttf");
-        chatCell.messageTextView.setTypeface(messageTypeface);
-
+            Typeface userNameTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Jelloween - Machinato.ttf");
+            chatCell.usernameTextView.setTypeface(userNameTypeface);
+            Typeface messageTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Jelloween - Machinato Light.ttf");
+            chatCell.messageTextView.setTypeface(messageTypeface);
+        }
         return convertView;
     }
 
-    private static class ChatCell
-    {
+
+    private static class ChatCell {
         ImageView chatImage;
         TextView usernameTextView;
         TextView messageTextView;
     }
+
 }

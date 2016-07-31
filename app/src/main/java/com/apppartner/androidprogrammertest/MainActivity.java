@@ -8,15 +8,17 @@ import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
-    TextView mainText;
+    private TextView mMainText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mainText = (TextView) findViewById(R.id.activityMainTextview);
+
+//        inserted text fonts
+        mMainText = (TextView) findViewById(R.id.mainActivityTextView);
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato Bold.ttf");
-        mainText.setTypeface(myTypeface);
+        mMainText.setTypeface(myTypeface);
     }
 
     public void onLoginButtonClicked(View v) {

@@ -7,35 +7,35 @@
 
     <include layout="@layout/toolbar" />
 
-
-
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="@dimen/button_width"
-        android:layout_centerInParent="true"
         android:layout_height="@dimen/button_height"
-        android:padding="@dimen/login_padding"
+        android:layout_centerInParent="true"
         android:layout_margin="@dimen/margins"
         android:background="@drawable/graphic_input"
-        android:hint="@string/password" />
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:padding="@dimen/login_padding" />
+
     <EditText
         android:id="@+id/usernameEditText"
         android:layout_width="@dimen/button_width"
         android:layout_height="@dimen/button_height"
-        android:layout_margin="@dimen/margins"
-        android:padding="@dimen/login_padding"
-        android:layout_centerHorizontal="true"
         android:layout_above="@id/passwordEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/margins"
         android:background="@drawable/graphic_input"
-        android:hint="@string/username" />
+        android:hint="@string/username"
+        android:padding="@dimen/login_padding" />
 
     <Button
         android:id="@+id/loginButton"
         android:layout_width="@dimen/button_width"
         android:layout_height="@dimen/button_height"
-        android:background="@drawable/btn_login"
-        android:layout_marginBottom="@dimen/login_margin"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/login_margin"
+        android:background="@drawable/btn_login" />
 
 </RelativeLayout>
