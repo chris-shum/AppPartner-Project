@@ -1,5 +1,5 @@
 
-package com.apppartner.androidprogrammertest;
+package com.apppartner.androidprogrammertest.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

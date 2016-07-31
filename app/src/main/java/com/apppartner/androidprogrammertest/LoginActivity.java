@@ -1,7 +1,7 @@
 package com.apppartner.androidprogrammertest;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -10,11 +10,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.apppartner.androidprogrammertest.models.AppPartnerData;
+import com.apppartner.androidprogrammertest.retrofit.PostRequest;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,7 +26,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends ActionBarActivity {
-
 
     Toolbar toolbar;
     TextView toolbarText;
@@ -54,28 +56,21 @@ public class LoginActivity extends ActionBarActivity {
 
         username = (EditText) findViewById(R.id.usernameEditText);
         password = (EditText) findViewById(R.id.passwordEditText);
+        Typeface editTextTypeface = Typeface.createFromAsset(getAssets(), "fonts/Jelloween - Machinato.ttf");
+        username.setTypeface(editTextTypeface);
+        password.setTypeface(editTextTypeface);
         loginButton = (Button) findViewById(R.id.loginButton);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                builder.setMessage("Yo")
-                        .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                                startActivity(intent);
-                            }
-                        });
-                builder.create();
-
-//                insertUser();
+                LoginToAppPartner(view.getContext());
             }
         });
-
     }
 
-    private void insertUser() {
+    private void LoginToAppPartner(final Context context) {
+
         String rootURL = getResources().getString(R.string.root_URL);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(rootURL)
@@ -91,43 +86,41 @@ public class LoginActivity extends ActionBarActivity {
 
             @Override
             public void onResponse(Call<AppPartnerData> call, Response<AppPartnerData> response) {
-                Log.d("Response", response.body().getCode() + "");
-                Log.d("Response", response.body().getMessage() + "");
-                Log.d("Response", response.headers() + "");
-                Log.d("Response", response.message() + "");
-                Log.d("Response", response.isSuccessful() + "");
                 long elapsedTime = System.currentTimeMillis() - startTime;
-                Log.d("Response", elapsedTime + "");
-
+                CreateDialog(context, response, elapsedTime);
             }
 
             @Override
             public void onFailure(Call<AppPartnerData> call, Throwable t) {
-
+                Toast.makeText(LoginActivity.this, "Login failed.  Please check your internet connection.", Toast.LENGTH_SHORT).show();
             }
         });
 
-
     }
 
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
+//    @Override
+//    public void onBackPressed() {
+//        Intent intent = new Intent(this, MainActivity.class);
+//        startActivity(intent);
+//    }
 
-    public Dialog CreateDialog() {
-        // Use the Builder class for convenient dialog construction
-        AlertDialog.Builder builder = new AlertDialog.Builder(getBaseContext());
-        builder.setMessage("Yo")
-                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                        startActivity(intent);
+    public void CreateDialog(Context context, final Response<AppPartnerData> response, long time) {
+        new AlertDialog.Builder(context)
+                .setTitle("App Partner Response")
+                .setMessage("Code: " + response.body().getCode() + "\nMessage: " + response.body().getMessage() + "\nTime to complete call: " + time + "ms")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (response.body().getCode().equals("Success")) {
+
+                            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            dialog.dismiss();
+                        }
                     }
-                });
-        return builder.create();
+                })
+                .show();
     }
 
 }

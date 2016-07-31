@@ -7,16 +7,19 @@
     <string name="animation_button">Animation Test</string>
     <string name="title_activity_chat">Chat</string>
     <string name="title_activity_login">Login</string>
-    <string name="title_activity_animation">AnimationActivity</string>
+    <string name="title_activity_animation">Animation</string>
 
 
+    <!--Animation Activity Strings-->
     <string name="coding_tasks">CODING TASKS</string>
     <string name="animation_prompt" formatted="false">Animate the App Partner icon. Make it fade to 0% alpha and then to 100% alpha when the fade button is pressed.  Allow it to be dragged around the screen by touching and dragging.</string>
     <string name="animation_bonus">BONUS POINTS FOR CREATIVITY</string>
 
-    <string name="root_URL">http://dev3.apppartner.com</string>
-    <string name="end_URL">BONUS POINTS FOR CREATIVITY</string>
 
+    <!--Login Activity Strings-->
+    <string name="root_URL">http://dev3.apppartner.com</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
 
 
 </resources>

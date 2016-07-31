@@ -2,16 +2,13 @@ package com.apppartner.androidprogrammertest;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
-import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.DragEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -21,19 +18,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
-public class AnimationActivity extends ActionBarActivity
-{
+public class AnimationActivity extends ActionBarActivity {
 
     Toolbar toolbar;
     TextView toolbarText, animationPrompt, bonusPrompt;
-    ImageView appIcon;
+    ImageView appIcon, appIcon2;
     Button fade;
     private android.widget.RelativeLayout.LayoutParams layoutParams;
-
+    RelativeLayout relativeLayout;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animation);
 
@@ -61,6 +56,7 @@ public class AnimationActivity extends ActionBarActivity
         bonusPrompt.setTypeface(bonus);
 
         appIcon = (ImageView) findViewById(R.id.appIcon);
+        appIcon2 = (ImageView) findViewById(R.id.appIcon2);
 
         fade = (Button) findViewById(R.id.fadeButton);
         fade.setOnClickListener(new View.OnClickListener() {
@@ -73,17 +69,18 @@ public class AnimationActivity extends ActionBarActivity
                     @Override
                     public void onAnimationStart(Animation animation) {
                     }
+
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         appIcon.startAnimation(fadeIn);
                     }
+
                     @Override
                     public void onAnimationRepeat(Animation animation) {
 
                     }
                 });
                 appIcon.startAnimation(fadeOut);
-
             }
         });
 
@@ -91,98 +88,97 @@ public class AnimationActivity extends ActionBarActivity
         appIcon.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                ClipData.Item item = new ClipData.Item((CharSequence)v.getTag());
+                ClipData.Item item = new ClipData.Item((CharSequence) v.getTag());
                 String[] mimeTypes = {ClipDescription.MIMETYPE_TEXT_PLAIN};
 
-                ClipData dragData = new ClipData(v.getTag().toString(),mimeTypes, item);
-                View.DragShadowBuilder myShadow = new View.DragShadowBuilder(appIcon);
+                ClipData dragData = new ClipData("AppIcon", mimeTypes, item);
+                View.DragShadowBuilder myShadow = new View.DragShadowBuilder(appIcon2);
 
-                v.startDrag(dragData,myShadow,null,0);
+                v.startDrag(dragData, myShadow, null, 0);
+//                appIcon.setVisibility(View.INVISIBLE);
                 return true;
             }
         });
 
-        appIcon.setOnDragListener(new View.OnDragListener() {
+        animationPrompt.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View v, DragEvent event) {
-                switch(event.getAction())
-                {
-                    case DragEvent.ACTION_DRAG_STARTED:
-                        layoutParams = (RelativeLayout.LayoutParams)v.getLayoutParams();
-                        Log.d("test234", "Action is DragEvent.ACTION_DRAG_STARTED");
+                layoutParams = (RelativeLayout.LayoutParams) appIcon.getLayoutParams();
 
+                switch (event.getAction()) {
+                    case DragEvent.ACTION_DRAG_STARTED:
+//                        Log.d("something", "Action is DragEvent.ACTION_DRAG_STARTED");
                         // Do nothing
                         break;
 
                     case DragEvent.ACTION_DRAG_ENTERED:
-                        Log.d("test234", "Action is DragEvent.ACTION_DRAG_ENTERED");
+//                        Log.d("something", "Action is DragEvent.ACTION_DRAG_ENTERED");
+                        break;
+
+                    case DragEvent.ACTION_DRAG_EXITED:
+//                        Log.d("something", "Action is DragEvent.ACTION_DRAG_EXITED");
+
+                        break;
+
+                    case DragEvent.ACTION_DRAG_LOCATION:
+//                        Log.d("something", "Action is DragEvent.ACTION_DRAG_LOCATION");
                         int x_cord = (int) event.getX();
                         int y_cord = (int) event.getY();
-                        Log.d("test234", "x:"+x_cord+" and y: "+y_cord);
-
-                        break;
-
-                    case DragEvent.ACTION_DRAG_EXITED :
-                        Log.d("test234", "Action is DragEvent.ACTION_DRAG_EXITED");
-                        x_cord = (int) event.getX();
-                        y_cord = (int) event.getY();
                         layoutParams.leftMargin = x_cord;
                         layoutParams.topMargin = y_cord;
-                        v.setLayoutParams(layoutParams);
-                        Log.d("test234", "x:"+x_cord+" and y: "+y_cord);
+                        appIcon.setLayoutParams(layoutParams);
                         break;
 
-                    case DragEvent.ACTION_DRAG_LOCATION  :
-                        Log.d("test234", "Action is DragEvent.ACTION_DRAG_LOCATION");
-                        x_cord = (int) event.getX();
-                        y_cord = (int) event.getY();
-                        Log.d("test234", "x:"+x_cord+" and y: "+y_cord);
-
-                        break;
-
-                    case DragEvent.ACTION_DRAG_ENDED   :
-                        Log.d("test234", "Action is DragEvent.ACTION_DRAG_ENDED");
-
+                    case DragEvent.ACTION_DRAG_ENDED:
+//                        Log.d("something", "Action is DragEvent.ACTION_DRAG_ENDED");
                         // Do nothing
+//                        appIcon.setVisibility(View.VISIBLE);
                         break;
 
                     case DragEvent.ACTION_DROP:
-                        Log.d("test234", "ACTION_DROP event");
-
+//                        Log.d("something", "ACTION_DROP event");
                         // Do nothing
                         break;
-                    default: break;
+                    default:
+                        break;
                 }
+
                 return true;
             }
         });
 
-        appIcon.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    ClipData data = ClipData.newPlainText("", "");
-                    View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(appIcon);
-
-                    appIcon.startDrag(data, shadowBuilder, appIcon, 0);
-                    appIcon.setVisibility(View.INVISIBLE);
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        });
-
-
-
+//        appIcon.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//                    ClipData data = ClipData.newPlainText("", "");
+//                    View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(appIcon);
+//
+//                    appIcon.startDrag(data, shadowBuilder, appIcon, 0);
+//                    appIcon.setVisibility(View.INVISIBLE);
+//                    return true;
+//                }
+//                else
+//                {
+//                    return false;
+//                }
+//            }
+//        });
     }
 
     @Override
-    public void onBackPressed()
-    {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
+        layoutParams = (RelativeLayout.LayoutParams) appIcon.getLayoutParams();
+        layoutParams.leftMargin = relativeLayout.getWidth()/3;
+        layoutParams.topMargin = relativeLayout.getHeight()/2+100;
+        appIcon.setLayoutParams(layoutParams);
     }
+
+//    @Override
+//    public void onBackPressed() {
+//        Intent intent = new Intent(this, MainActivity.class);
+//        startActivity(intent);
+//    }
 }

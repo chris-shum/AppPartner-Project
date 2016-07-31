@@ -1,6 +1,5 @@
 package com.apppartner.androidprogrammertest;
 
-import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -82,12 +81,12 @@ public class ChatActivity extends ActionBarActivity
         listView.setAdapter(chatsArrayAdapter);
     }
 
-    @Override
-    public void onBackPressed()
-    {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
+//    @Override
+//    public void onBackPressed()
+//    {
+//        Intent intent = new Intent(this, MainActivity.class);
+//        startActivity(intent);
+//    }
 
     private String loadChatFile() throws IOException
     {

@@ -1,4 +1,6 @@
-package com.apppartner.androidprogrammertest;
+package com.apppartner.androidprogrammertest.retrofit;
+
+import com.apppartner.androidprogrammertest.models.AppPartnerData;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
