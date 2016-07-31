@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_coding_tasks"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity"
+    android:gravity="center_vertical|center_horizontal">
+
+
+    <TextView
+        android:id="@+id/activityMainTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/coding_tasks"
+        android:textColor="@color/white"
+        android:textSize="@dimen/coding_tasks_text_size" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:layout_margin="@dimen/margins"
+        android:background="@drawable/btn_main_chat"
+        android:onClick="onChatButtonClicked" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:layout_margin="@dimen/margins"
+        android:background="@drawable/btn_main_login"
+        android:onClick="onLoginButtonClicked"
+        android:scaleType="fitCenter" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:layout_margin="@dimen/margins"
+        android:background="@drawable/btn_main_animation"
+        android:onClick="onAnimationTestButtonClicked" />
+</LinearLayout>

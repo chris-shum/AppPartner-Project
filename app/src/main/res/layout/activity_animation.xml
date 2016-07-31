@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_animation"
+    tools:context="com.apppartner.androidprogrammertest.AnimationActivity">
+
+    <include layout="@layout/toolbar" />
+
+
+    <TextView
+        android:id="@+id/animationTextView"
+        android:layout_width="310dp"
+        android:layout_height="350dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_cell_animation_test"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/animation_padding"
+        android:text="@string/animation_prompt"
+        android:textSize="@dimen/animation_prompt" />
+
+    <TextView
+        android:id="@+id/bonusPrompt"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:text="@string/animation_bonus"
+        android:textSize="@dimen/animation_prompt"
+/>
+
+    <Button
+        android:id="@+id/fadeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/fade_margin"
+        android:background="@drawable/btn_fade" />
+
+    <ImageView
+        android:layout_width="@dimen/app_icon"
+        android:layout_height="@dimen/app_icon"
+        android:layout_above="@id/fadeButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="48dp"
+        android:src="@drawable/ic_apppartner"
+        android:id="@+id/appIcon" />
+
+
+</RelativeLayout>

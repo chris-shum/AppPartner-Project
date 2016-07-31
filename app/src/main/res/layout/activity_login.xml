@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_login"
+    tools:context="com.apppartner.androidprogrammertest.LoginActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <EditText
+        android:id="@+id/usernameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:background="@drawable/graphic_input"
+        android:hint="username" />
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_below="@id/usernameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/graphic_input"
+        android:hint="password" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/passwordEditText"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_login" />
+
+</RelativeLayout>

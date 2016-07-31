@@ -1,0 +1,29 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="margins">8dp</dimen>
+    <dimen name="chat_padding">16dp</dimen>
+
+    <dimen name="button_height">64dp</dimen>
+    <dimen name="button_width">288dp</dimen>
+
+    <dimen name="coding_tasks_text_size">22sp</dimen>
+    <dimen name="header_text_size">22sp</dimen>
+
+    <dimen name="chat_name">19sp</dimen>
+    <dimen name="chat_message">15sp</dimen>
+
+    <dimen name="animation_prompt">20sp</dimen>
+    <dimen name="animation_bonus">36sp</dimen>
+    <dimen name="fade_margin">32dp</dimen>
+    <dimen name="app_icon">128dp</dimen>
+    <dimen name="animation_padding">8dp</dimen>
+
+
+
+
+
+
+</resources>
