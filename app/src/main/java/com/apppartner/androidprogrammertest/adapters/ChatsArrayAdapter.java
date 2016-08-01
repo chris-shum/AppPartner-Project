@@ -27,6 +27,8 @@ public class ChatsArrayAdapter extends ArrayAdapter<ChatData> {
 
 //    added the imageview to the adapter
 //    imported Picasso library to handle image inserts
+//    added check for convertView as a view does not need to be inflated if you pass a view in already
+
 
     public View getView(int position, View convertView, ViewGroup parent) {
         ChatCell chatCell = new ChatCell();
