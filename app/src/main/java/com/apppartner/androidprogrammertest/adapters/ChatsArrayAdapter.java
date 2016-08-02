@@ -35,7 +35,7 @@ public class ChatsArrayAdapter extends ArrayAdapter<ChatData> {
 
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.cell_chat, parent, false);
+            convertView = inflater.inflate(R.layout.cell_chat, parent, false);}
 
             chatCell.chatImage = (ImageView) convertView.findViewById(R.id.chatImage);
             chatCell.usernameTextView = (TextView) convertView.findViewById(R.id.usernameTextView);
@@ -51,7 +51,7 @@ public class ChatsArrayAdapter extends ArrayAdapter<ChatData> {
             chatCell.usernameTextView.setTypeface(userNameTypeface);
             Typeface messageTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Jelloween - Machinato Light.ttf");
             chatCell.messageTextView.setTypeface(messageTypeface);
-        }
+
         return convertView;
     }
 
